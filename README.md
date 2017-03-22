@@ -1,2 +1,2 @@
-# NFe
-Scripts para leitura de dados das Notas Fiscais Eletrônicas de Mercadoria - SEFAZ
+# Auditoria
+Scripts utilizados para auxílio na execução de testes de auditoria.

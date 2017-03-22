@@ -1,3 +1,7 @@
+#############################################################################################
+# Script para Leitura de arquivos XML com os dados de Notas Fiscais de Mercadoria do SEFAZ  #
+#############################################################################################
+
 from bs4 import BeautifulSoup
 import os
 

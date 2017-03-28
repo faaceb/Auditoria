@@ -6,10 +6,10 @@ from bs4 import BeautifulSoup
 import os
 
 #DIRETORIO ONDE ENCONTRAM-SE OS XML
-diretorio = 'C:\\XML\\arquivos'
+diretorio = 'C:\\Users\\a37117\\Desktop\\XML\\arquivos'
 
 #Arquivo CSV resultante
-arquivoCSV = 'resultadoExtracaoXML_VENANCIO.csv'
+arquivoCSV = 'resultadoExtracaoXML_CBD_Fev16.csv'
 
 #CARACTERES DE CONTROLE DE CSV
 caractTerminador = '"'
@@ -126,7 +126,8 @@ with open(arquivoCSV, 'w+') as caminhoArquivoCSVAberto:
     caminhoArquivoCSVAberto.write(cabecalho)
     caminhoArquivoCSVAberto.write('\n') #Pular uma linha
 
-#print(cabecalho)
+#Contador
+contador = 1
 
 #Executa a extracao em cada arquivo XML contido no Diretorio
 for arq in os.listdir(diretorio):
@@ -278,10 +279,12 @@ for arq in os.listdir(diretorio):
     else: infProt_chNfe = ''
     if len(arqParsed.nfeproc.protnfe.infprot.findAll('xmotivo')) > 0: infProt_xMotivo = arqParsed.nfeproc.protnfe.infprot.findAll('xmotivo')[0].string 
     else: infProt_xMotivo = ''
+
+    #Comeco da linha do registro do CSV
+    linha = '%s%s%s%s' % (caractTerminador, arq, caractTerminador, caractSeparador)
     
     #Construcao da linha a partir da coleta dos dados do XML
     #linha = '%s%s%s%s%s' % (linha, caractTerminador, infNfe_attr_id, caractTerminador, caractSeparador)
-    linha = '%s%s%s%s' % (caractTerminador, arq, caractTerminador, caractSeparador)
     linha = '%s%s%s%s%s' % (linha, caractTerminador, infNfe_cUF, caractTerminador, caractSeparador)
     linha = '%s%s%s%s%s' % (linha, caractTerminador, infNfe_cNF, caractTerminador, caractSeparador)
     linha = '%s%s%s%s%s' % (linha, caractTerminador, infNfe_natOp, caractTerminador, caractSeparador)
@@ -401,10 +404,20 @@ for arq in os.listdir(diretorio):
         else: Itens_Imposto_vTotTrib = ''
         if len(arqParsed_Itens.det.imposto.findAll('vtottrib')) > 0: Itens_Imposto_vTotTrib = arqParsed_Itens.det.imposto.findAll('vtottrib')[0].string 
         else: Itens_Imposto_vTotTrib = ''
-        if len(arqParsed_Itens.det.imposto.icms.icms40.findAll('orig')) > 0: Itens_Imposto_ICMS_orig = arqParsed_Itens.det.imposto.icms.icms40.findAll('orig')[0].string 
-        else: Itens_Imposto_ICMS_orig = ''
-        if len(arqParsed_Itens.det.imposto.icms.icms40.findAll('cst')) > 0: Itens_Imposto_ICMS_CST = arqParsed_Itens.det.imposto.icms.icms40.findAll('cst')[0].string 
-        else: Itens_Imposto_ICMS_CST = ''
+        
+        #Impostos - ICMS
+        if arqParsed_Itens.find('icms40'):
+            if len(arqParsed_Itens.det.imposto.icms.icms40.findAll('orig')) > 0: Itens_Imposto_ICMS_orig = arqParsed_Itens.det.imposto.icms.icms40.findAll('orig')[0].string 
+            else: Itens_Imposto_ICMS_orig = ''
+            if len(arqParsed_Itens.det.imposto.icms.icms40.findAll('cst')) > 0: Itens_Imposto_ICMS_CST = arqParsed_Itens.det.imposto.icms.icms40.findAll('cst')[0].string 
+            else: Itens_Imposto_ICMS_CST = ''
+        
+        #Impostos - ICMS
+        if arqParsed_Itens.find('icms00'):
+            if len(arqParsed_Itens.det.imposto.icms.icms00.findAll('orig')) > 0: Itens_Imposto_ICMS_orig = arqParsed_Itens.det.imposto.icms.icms00.findAll('orig')[0].string 
+            else: Itens_Imposto_ICMS_orig = ''
+            if len(arqParsed_Itens.det.imposto.icms.icms00.findAll('cst')) > 0: Itens_Imposto_ICMS_CST = arqParsed_Itens.det.imposto.icms.icms00.findAll('cst')[0].string 
+            else: Itens_Imposto_ICMS_CST = ''
         
         #Impostos - PIS
         if arqParsed_Itens.find('pisoutr'):
@@ -507,6 +520,7 @@ for arq in os.listdir(diretorio):
         
         #print('%s%s%s' % ('Arquivo: ', arq, ' - Processo.'))
 
-    print('%s%s%s' % ('Arquivo: ', arq, ' - Processo.'))
+    print('%s: %s%s%s' % (contador, 'Arquivo: ', arq, ' - Processado.'))
+    contador = contador + 1
 
 print ('---PROCESSO FINALIZADO---')

@@ -11,7 +11,8 @@ arquivoDadosRI = 'C:\\ProgramData\\MySQL\\MySQL Server 5.7\\Uploads\\ExtracaoRI_
 #arquivoDadosRI = 'C:\\ProgramData\\MySQL\\MySQL Server 5.7\\Uploads\\ExtracaoRI_Jan17_a_Fev17.csv'
 
 #Arquivo CSV resultante
-arquivoCSV = 'resultadoComparacao_CBD_Fev16.csv'
+#arquivoCSV = 'resultadoComparacao_CBD_Fev16.csv'
+arquivoCSV = 'teste.csv'
 
 #CARACTERES DE CONTROLE DE CSV
 caractTerminador = '"'
@@ -23,6 +24,7 @@ cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "XML_CNPJ_EMISSOR", car
 cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "XML_NR_NF", caractTerminador, caractSeparador)
 cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "XML_VALOR_NF", caractTerminador, caractSeparador)
 cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "XML_EMISSAO", caractTerminador, caractSeparador)
+cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "XML_NAT_OPER", caractTerminador, caractSeparador)
 cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "XML_ENCONTRADO_RI", caractTerminador, caractSeparador)
 cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "RI_CNPJ_EMISSOR", caractTerminador, caractSeparador)
 cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "RI_NR_NF", caractTerminador, caractSeparador)
@@ -99,6 +101,7 @@ with open(arquivoDadosXML, 'r') as caminhoArquivoXMLAberto:
         xmCnpjEmissor = linha[22]
         xmlValorNf = linha[46]
         xmlEmissao = linha[8].split('T')[0]
+        xmlNatOper = linha[3]
         
         #Remove dados das variaveis do RI
         riChaveNf = ''
@@ -128,6 +131,7 @@ with open(arquivoDadosXML, 'r') as caminhoArquivoXMLAberto:
         linhaTotal = '%s%s%s%s%s' % (linhaTotal, caractTerminador, xmlNrNf, caractTerminador, caractSeparador)
         linhaTotal = '%s%s%s%s%s' % (linhaTotal, caractTerminador, xmlValorNf, caractTerminador, caractSeparador)
         linhaTotal = '%s%s%s%s%s' % (linhaTotal, caractTerminador, xmlEmissao, caractTerminador, caractSeparador)
+        linhaTotal = '%s%s%s%s%s' % (linhaTotal, caractTerminador, xmlNatOper, caractTerminador, caractSeparador)
 
         #Diz se os dados da NF no XML foram encontradas na base do ERP RI
         linhaTotal = '%s%s%s%s%s' % (linhaTotal, caractTerminador, xmlEcontradoRi, caractTerminador, caractSeparador)

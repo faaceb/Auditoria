@@ -25,6 +25,7 @@ cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "XML_NR_NF", caractTerm
 cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "XML_VALOR_NF", caractTerminador, caractSeparador)
 cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "XML_EMISSAO", caractTerminador, caractSeparador)
 cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "XML_NAT_OPER", caractTerminador, caractSeparador)
+cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "XML_CNPJ_DEST", caractTerminador, caractSeparador)
 cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "XML_ENCONTRADO_RI", caractTerminador, caractSeparador)
 cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "RI_CNPJ_EMISSOR", caractTerminador, caractSeparador)
 cabecalho = '%s%s%s%s%s' % (cabecalho, caractTerminador, "RI_NR_NF", caractTerminador, caractSeparador)
@@ -102,6 +103,7 @@ with open(arquivoDadosXML, 'r') as caminhoArquivoXMLAberto:
         xmlValorNf = linha[46]
         xmlEmissao = linha[8].split('T')[0]
         xmlNatOper = linha[3]
+        xmlCnpjDest = linha[27]
         
         #Remove dados das variaveis do RI
         riChaveNf = ''
@@ -132,6 +134,7 @@ with open(arquivoDadosXML, 'r') as caminhoArquivoXMLAberto:
         linhaTotal = '%s%s%s%s%s' % (linhaTotal, caractTerminador, xmlValorNf, caractTerminador, caractSeparador)
         linhaTotal = '%s%s%s%s%s' % (linhaTotal, caractTerminador, xmlEmissao, caractTerminador, caractSeparador)
         linhaTotal = '%s%s%s%s%s' % (linhaTotal, caractTerminador, xmlNatOper, caractTerminador, caractSeparador)
+        linhaTotal = '%s%s%s%s%s' % (linhaTotal, caractTerminador, xmlCnpjDest, caractTerminador, caractSeparador)
 
         #Diz se os dados da NF no XML foram encontradas na base do ERP RI
         linhaTotal = '%s%s%s%s%s' % (linhaTotal, caractTerminador, xmlEcontradoRi, caractTerminador, caractSeparador)

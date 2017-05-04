@@ -6,10 +6,10 @@ from bs4 import BeautifulSoup
 import os
 
 #DIRETORIO ONDE ENCONTRAM-SE OS XML
-diretorio = 'C:\\Users\\a37117\\Desktop\\XML\\arquivos'
+diretorio = 'C:\\Users\\a37117\\Desktop\\XML_Fernanda'
 
 #Arquivo CSV resultante
-arquivoCSV = 'resultadoExtracaoXML_CBD_Fev16.csv'
+arquivoCSV = 'resultadoExtracaoXML_Fernanda.csv'
 
 #CARACTERES DE CONTROLE DE CSV
 caractTerminador = '"'
@@ -417,6 +417,13 @@ for arq in os.listdir(diretorio):
             if len(arqParsed_Itens.det.imposto.icms.icms00.findAll('orig')) > 0: Itens_Imposto_ICMS_orig = arqParsed_Itens.det.imposto.icms.icms00.findAll('orig')[0].string 
             else: Itens_Imposto_ICMS_orig = ''
             if len(arqParsed_Itens.det.imposto.icms.icms00.findAll('cst')) > 0: Itens_Imposto_ICMS_CST = arqParsed_Itens.det.imposto.icms.icms00.findAll('cst')[0].string 
+            else: Itens_Imposto_ICMS_CST = ''
+
+        #Impostos - ICMS
+        if arqParsed_Itens.find('icmssn102'):
+            if len(arqParsed_Itens.det.imposto.icms.icmssn102.findAll('orig')) > 0: Itens_Imposto_ICMS_orig = arqParsed_Itens.det.imposto.icms.icmssn102.findAll('orig')[0].string 
+            else: Itens_Imposto_ICMS_orig = ''
+            if len(arqParsed_Itens.det.imposto.icms.icmssn102.findAll('cst')) > 0: Itens_Imposto_ICMS_CST = arqParsed_Itens.det.imposto.icms.icmssn102.findAll('cst')[0].string
             else: Itens_Imposto_ICMS_CST = ''
         
         #Impostos - PIS

@@ -1,5 +1,5 @@
 ###########################################################################
-# Script em PowerShell para efetuar ping em diversas estacoes de trabalho #
+# Script em PowerShell para efetuar ping em diversas estacoes de trabalho ##
 ###########################################################################
 
 #Obtem a lista de maquinas (hostname)

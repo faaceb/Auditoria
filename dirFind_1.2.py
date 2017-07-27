@@ -22,12 +22,18 @@ contador = 0
 
 #Para cada linha no arquivo, execute
 for cadaLinha in linhas:
-
+    
     #Acessa a URL
     urlCompleta = url + cadaLinha
     r = requests.head(urlCompleta)
-
+    
     contador = contador + 1
-
+    
     #Imprime o resultado do acesso
-    print ('%s;%s;%s' % (contador,urlCompleta, r.status_code))
+    resultadoLinha = ('%s;%s;%s' % (contador,urlCompleta, r.status_code))
+    print (resultadoLinha)
+    
+    #Arquivo que contem o resultado da analise
+    arquivo = 'resultado.txt'
+    with open(arquivo, 'a+') as arquivoAberto:
+        arquivoAberto.write(resultadoLinha + '\n')

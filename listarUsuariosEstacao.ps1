@@ -1,7 +1,16 @@
-#$Computername = $env:COMPUTERNAME
+#Obtem a listagem deusuarios locais
+$computador = Get-Content "C:\TEMP\computador.txt"
 
-$adsi = [ADSI]"WinNT://$Computername"
+foreach ($i in $computador){
 
-$Users = $adsi.Children  | where {$_.SchemaClassName -eq 'user'}
+    Write-Host ''
+    Write-Host '---'$i' ---'
 
-$Users 
+    $ADSI = [ADSI]"WinNT://$i"
+
+    $Users = $ADSI.Children  | where {$_.SchemaClassName  -eq 'user'}
+
+    $Users | Select Name,Description,LastLogin,flags
+
+    #$Users | gm
+ }
